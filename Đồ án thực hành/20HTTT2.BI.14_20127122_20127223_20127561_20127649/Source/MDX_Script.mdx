@@ -1,0 +1,39 @@
+-- 1. Thống kê lợi nhuận theo từng quốc gia
+SELECT [Measures].[Tong Loi Nhuan] ON COLUMNS,
+NON EMPTY [Dim Location].[Country].[Country] ON ROWS
+FROM [OLAP]
+
+-- 2. Thống kê số lượng đơn hàng và chi phí vận chuyển theo ngày/ tháng/ năm 
+SELECT {[Measures].[Tong SL Don Hang], [Tong Chi Phi Van Chuyen]} ON COLUMNS,
+NON EMPTY CROSSJOIN ([Dim Date].[Hierarchy Date].[Year], [Dim Date].[Month].[Month], [Dim Date].[Day].[Day]) ON ROWS
+FROM [OLAP]
+
+-- 3. Thống kê số lượng sản phẩm bán được theo từng danh mục (Category) và danh mục con (Sub-Category) theo từng tháng/năm
+SELECT NON EMPTY CROSSJOIN ([Measures].[Tong SL San Pham], [Dim Product].[Category].[Category], [Sub- Category]) ON COLUMNS,
+NON EMPTY CROSSJOIN ([Dim Date].[Hierarchy Date].[Year], [Dim Date].[Month].[Month]) ON ROWS
+FROM [OLAP]
+
+SELECT NON EMPTY CROSSJOIN ([Dim Product].[Category].[Category], [Sub- Category]) ON COLUMNS,
+NON EMPTY CROSSJOIN ([Dim Date].[Hierarchy Date].[Year], [Dim Date].[Month].[Month]) ON ROWS
+FROM [OLAP]
+WHERE [Measures].[Tong SL San Pham]
+
+-- 4. Tổng lợi nhuận theo từng phân khúc khách hàng trong mỗi tháng/ năm
+SELECT NON EMPTY CROSSJOIN ([Measures].[Tong Loi Nhuan], [Dim Customer].[Segment].[Segment]) ON COLUMNS,
+NON EMPTY CROSSJOIN ([Dim Date].[Hierarchy Date].[Year], [Dim Date].[Month].[Month]) ON ROWS
+FROM [OLAP]
+
+SELECT NON EMPTY [Dim Customer].[Segment].[Segment] ON COLUMNS,
+NON EMPTY CROSSJOIN ([Dim Date].[Hierarchy Date].[Year], [Dim Date].[Month].[Month]) ON ROWS
+FROM [OLAP]
+WHERE [Measures].[Tong Loi Nhuan]
+
+-- 5. Thống kê số lượng sản phẩm được bán theo từng quốc gia và thị trường
+SELECT NON EMPTY [Measures].[Tong SL San Pham] ON COLUMNS,
+NON EMPTY CROSSJOIN ([Dim Location].[Hierarchy Location].[Country], [Dim Location].[Market].[Market]) ON ROWS
+FROM [OLAP]
+
+-- 6. Top 5 khu vực có doanh thu cao nhất theo từng năm
+SELECT NON EMPTY (TOPCOUNT([Dim Location].[Region].[Region], 5, [Measures].[Tong Doanh Thu])) ON COLUMNS,
+NON EMPTY [Dim Date].[Hierarchy Date].[Year] ON ROWS
+FROM [OLAP]

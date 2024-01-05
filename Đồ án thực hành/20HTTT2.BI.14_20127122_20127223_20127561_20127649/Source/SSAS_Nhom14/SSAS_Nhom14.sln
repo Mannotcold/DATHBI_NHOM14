@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.34301.259
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D2ABAB84-BF74-430A-B69E-9DC6D40DDA17}") = "SSAS_Nhom14", "SSAS_Nhom14\SSAS_Nhom14.dwproj", "{C8C7D701-3F66-4D2C-92A1-9DD01055DB52}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C8C7D701-3F66-4D2C-92A1-9DD01055DB52}.Development|Default.ActiveCfg = Development
+		{C8C7D701-3F66-4D2C-92A1-9DD01055DB52}.Development|Default.Build.0 = Development
+		{C8C7D701-3F66-4D2C-92A1-9DD01055DB52}.Development|Default.Deploy.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FB0251C5-5B9F-42BE-AEC7-FE10E436B712}
+	EndGlobalSection
+EndGlobal
